@@ -11,9 +11,13 @@ configuration:
   mqtt_pwd:
     name: Mot de passe MQTT
     description: Mot de passe de l'utilisateur MQTT
-  send_cmd_retry_delay:
+  send_cmd_retry_loop_delay:
     name: Délai pour re-essayer une commande
-    description: Délai pour re-essayer d'envoyer une command au véhicule via BLE
+    description: Période délai en secondes pour re-essayer une commande pour le véhicule via BLE
+  tesla_presence_loop_delay:
+    name: Délai pour détecter le véhicule
+    description: Période de délai en secondes pour détecter la présence du véhicule via BLE. HA nécessite que cette valeur soit au minimum 180s (3m).
+ least 3m.
   debug:
     name: Journalisation du débogage
     description: Imprimer des messages détaillés dans le journal pour le débogage

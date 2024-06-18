@@ -18,23 +18,25 @@ map:
   - share:rw
 startup: services
 options:
-  vin: ""
-  ble_mac: ""
-  debug: false
   mqtt_ip: ""
   mqtt_port: "1883"
   mqtt_user: ""
   mqtt_pwd: ""
-  send_cmd_retry_delay: "5"
+  send_cmd_retry_loop_delay: "5"
+  tesla_presence_loop_delay: "180"
+  debug: false
+  vin: ""
+  ble_mac: ""
 schema:
-  vin: str?
+  mqtt_ip: str
+  mqtt_port: str
+  mqtt_user: "str?"
+  mqtt_pwd: password
+  send_cmd_retry_loop_delay: "int(1,)?"
+  tesla_presence_loop_delay: "int(180,)?"
   debug: bool
-  ble_mac: str?
-  mqtt_ip: str?
-  mqtt_port: str?
-  mqtt_user: str?
-  mqtt_pwd: password?
-  send_cmd_retry_delay: str?
+  vin: str
+  ble_mac: "str?"
 # ingress: true
 # panel_icon: mdi:forward
 # backup_exclude:
