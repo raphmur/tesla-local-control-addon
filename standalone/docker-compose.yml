@@ -1,28 +1,35 @@
-volumes:
-  tesla_ble_mqtt:
-    external: true
+version: '3.8'
 
-services:   
-  tesla_ble_mqtt:
-    container_name: tesla_ble_mqtt
-    # image: "iainbullock/tesla_ble_mqtt:latest"
- 
-    # environment:
-      # - TZ='Europe/London'
+services:
+  tesla_local_control_addon:
+    container_name: tesla_local_control_addon
+    image: tesla_local_control_addon:0.0.8dev
 
-    stdin_open: true
-    tty: true    
-    
-    entrypoint: "/rootfs/app/run.sh"
-    working_dir: /data
-    
-    volumes:
-      - tesla_ble_mqtt:/data
-      - /run/dbus:/run/dbus
-      - /usr/share/tesla_ble_mqtt:/share/tesla_ble_mqtt
-        
+### THIS DOESN'T WORK ... maybe the double quotes aren't needed?
+### This logic is now in run.sh BUT it would be nicer somehow to have it in here.
+#    entrypoint: "[ -L /command/with-contenv ] \
+#                  && /app/run.sh \
+#                  || /usr/bin/sh /app/run.sh"
+
+    env_file:
+      - ./env
+
     network_mode: host
-    privileged: true 
+    privileged: true
 
     restart: no
-    #restart: unless-stopped  
+    #restart: unless-stopped
+
+    stdin_open: true
+    tty: true
+
+    volumes:
+      - data:/data
+      - share:/share/tesla_ble_mqtt
+      - /run/dbus:/run/dbus
+
+    working_dir: /data
+
+volumes:
+  data:
+  share:

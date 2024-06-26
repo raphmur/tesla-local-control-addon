@@ -22,7 +22,7 @@ This package contains:
 
 It has been tested on RPi 3B so far. Here are the assumptions and way forward:
 - You already have Docker working on the host device, and you are familiar with basic Docker concepts and actions
-- Clone the self packaged shell script: `wget https://github.com/tesla-local-control/tesla-local-control-addon/raw/main/standalone/start_tesla_ble_mqtt.sh`
+- Download the self packaged shell script: `wget https://raw.githubusercontent.com/tesla-local-control/tesla-local-control-addon/main/standalone/start_tesla_ble_mqtt.sh` OR `curl -O https://raw.githubusercontent.com/tesla-local-control/tesla-local-control-addon/main/standalone/start_tesla_ble_mqtt.sh`
 - Edit the script to input your own settings:
 	- TESLA_VIN (car VIN)
 	- BLE_MAC: Used for proximity discovery. Tesla's BLE MAC is in the form AA:BB:CC:DD:EE:FF. To find the address, use "BLE scanner" on Android or "nRF Connect" on iOS and look for a device with a name starting with "S" and ending with "C".
