@@ -3,9 +3,9 @@
 protected_branch='main'
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-# Find and fix trailing white space and tabs
-# Replace tabs with white space
-# Bypass it with the --no-verify option to git-commit
+### Find and fix trailing white space and tabs
+#   Replace tabs with white space
+#   Bypass it with the --no-verify option to git-commit
 #
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
@@ -27,28 +27,31 @@ for FILE in $(
     | uniq \
 )
 do
-# replace whitespace-characters with nothing
-# if first execution of sed-command fails, try second one (Mac OS X version)
-    (
-         sed -i -e 's/[ 	]*$//g' -e 's/	/        /g' $FILE > /dev/null 2>&1 \
-         || \
-         sed -i '' -e 's/[ 	]*$//g' -e 's/	/        /g' $FILE \
-    ) \
-    && \
-# (re-)add files that have been altered to Git commit-tree
-#   when change was a [:space:]-character @EOL|EOF git-history becomes weird...
-    git add "$FILE"
+  # replace whitespace-characters with nothing
+  # if first execution of sed-command fails, try second one (Mac OS X version)
+  (
+    sed -i -e 's/[ 	]*$//g' -e 's/	/        /g' $FILE > /dev/null 2>&1 \
+    || \
+    sed -i '' -e 's/[ 	]*$//g' -e 's/	/        /g' $FILE \
+  ) \
+  && \
+  # (re-)add files that have been altered to Git commit-tree
+  #   when change was a [:space:]-character @EOL|EOF git-history becomes weird...
+  git add "$FILE"
 done
 # restore $IFS
 IFS="$SAVEIFS"
+### END Find and fix trailing white space and tabs
 
-# Prevent commit on main branch
+
+### Prevent commit on main branch
 #
 if [ $protected_branch = $current_branch ]; then
   echo "You should not commit to $protected_branch!"
-  echo 'To bypass the protection, add to the git commit command "--no-verify"'
+  echo 'If you still want to proceed add "--no-verify" to your git commit'
   exit 1 # push will not execute
 fi
+### END Prevent commit on main branch
 
 # Exit script with the exit-code of git's check for white space characters
 exec git diff-index --check --cached $against --

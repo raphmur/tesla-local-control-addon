@@ -9,7 +9,8 @@ setup_auto_discovery() {
     "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "tesla_ble_mqtt",
     "model": "Tesla BLE",
-    "name": "Tesla_BLE_MQTT"
+    "name": "Tesla_BLE_MQTT",
+    "sw_version": "0.0.9"
    },
    "device_class": "presence",
    "name": "Presence",
