@@ -1,14 +1,24 @@
 configuration:
-  mqtt_ip:
+  vin_list:
+    name: Un ou plusieurs NIVs séparés par un | (pipe); NIV affiché dans l'application Tesla
+    description: Ex. Simple 5YJ3E1EB6JF111222; Multiple 5YJ3E1EB6JF111222|5YJ3E1EB6JF333444|...
+  ble_presence_detection_ttl:
+    name: TTL pour la détection de présence de véhicule par proximitée BLE
+    description: TTL en secondes pour véhicule non présent; Utiliser 0 pour désactivé la détection
+  ble_mac_list:
+    name: Un ou plusieurs BLE MACs (aa:bb:cc:dd:ee:ff) séparés par un | (pipe); Optionnel pour la détection de véhicule
+    description: Utilisez Android "BLE scanner" ou iOS "nRF Connect"; 1) localiser le BLE Local Name de votre véhicule. Le nom commence par la lettre S et termine par C. Trouvez pour cette entrée le MAC Address. Si vous avez plusieurs véhicules, utiliser la puissance du signal pour déterminer lequel d'entre-eux chosir.
+    description: Use Android "BLE scanner" or iOS "nRF Connect"; First locate your car's BLE Local Name, it starts with letter S and ends with C. In the app for the car, find the MAC address. If you have multiple Twsla cars, use the signal strength to figure out which one to pick.
+  mqtt_server:
     name: MQTT Serveur
     description: Adresse IP or Hostname pour le serveur MQTT
   mqtt_port:
     name: MQTT Port
     description: Port d'écoute pour le service MQTT
-  mqtt_user:
-    name: Utilisateur MQTT
+  mqtt_username:
+    name: Utilisateur MQTT; Par défault si vide, c'est le mode "anonyme"
     description: Now d'utilisateur MQTT
-  mqtt_pwd:
+  mqtt_password:
     name: Mot de passe MQTT
     description: Mot de passe de l'utilisateur MQTT
   vin:
@@ -20,6 +30,6 @@ configuration:
   debug:
     name: Journalisation du débogage
     description: Imprimer des messages détaillés dans le journal pour le débogage
-  send_cmd_retry_delay:
+  ble_cmd_retry_delay:
     name: Délai pour re-essayer une commande
     description: Délai pour re-essayer d'envoyer une command au véhicule via BLE

@@ -1,5 +1,15 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## X.X.X
+
+### Breaking change & Upgrade Instruction
+- Cut & Paste your current vin to vin_list
+- Cut & Paste your current mac_addr to mac_addr_list
+
+### Changed
+- Added support for multi-cars
+- Added toggle to enable or disable vehicule detection
+
 ## 0.0.10f
 
 ### Changed

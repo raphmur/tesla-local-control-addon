@@ -15,25 +15,22 @@ If you have already created a key pair that you want to reuse, place the private
 
 
 You will need to provide:
-- TESLA_VIN (car VIN)
-- BLE_MAC: Used for proximity discovery. Tesla's BLE MAC is in the form AA:BB:CC:DD:EE:FF. To find the address, use "BLE scanner" on Android or "nRF Connect" on iOS and look for a device with a name starting with "S" and ending with "C".
-- MQTT_IP: ip of your MQTT server
-- MQTT_PORT
-- MQTT_USER
-- MQTT_PWD
-- SEND_CMD_RETRY_DELAY: delay between retries in case BLE fails. Use 5 by default
+- vin_list                  : VIN single or multiple separated by a | (pipe); Required
+- ble_mac_list              : BLE MAC Addr list single or multiple separated by a | (pipe); Optional for car presence detection
+- presence_detection_ttl    : TTL in seconds when car is considered gone after last received BLE advertisement; 0 to disable detection
+- mqtt_server               : Hostname or IP of your MQTT server; Default 127.0.0.1
+- mqtt_port                 : MQTT service port; Default 1883
+- mqtt_useranme             : MQTT Username; Default anonymous
+- mqtt_password             : MQTT Password
+- ble_cmd_retry_delay       : Delay to retry sending a command to the car over BLE; Default 5
 
+ATTENTION: If you have multiple cars and require presence detection, tesla_vin_list tesla_vin{n} and ble_mac_list ble_mac{n} must match the same car. For example, the BLE MAC Addr in the 2nd position must match the same car's VIN in the 2nd position of the tesla_vin_list.
 
-## 1.2 For the standalone version **BROKEN - please see https://github.com/iainbullock/tesla_ble_mqtt_docker for temporary workaround**
+Start the add-on, check the logs for anything suspecious.
 
-It has been tested on RPi 3B so far. Here are the assumptions and way forward:
-- You already have Docker working on the host device, and you are familiar with basic Docker concepts and actions
-- Clone the self packaged shell script: `wget https://github.com/raphmur/tesla-local-control-addon/blob/main/standalone/start_tesla_ble_mqtt.sh`
-- Edit the script to input your own settings (same as for HA Add on)
-- run the script: `./start_tesla_ble_mqtt.sh`, it will download the rest of the elements, build and deploy the container
+## 1.2 For the standalone Docker version please see https://github.com/tesla-local-control/tesla_ble_mqtt_docker
 
-
-## 2 THEN
+## 2.0 Check in HA for new devices named Tesla_BLE_MQTT_VIN ???
 
 - A new device called Tesla_BLE_MQTT should have automatically appeared. Click it to view the the associated entities.
 - If this is the first time you have run the container, press the 'Generate Keys' button in HA (Settings -> Devices & Services -> Devices (tab) -> Tesla_BLE_MQTT). This will generate the public and private keys as per Shanker's blog

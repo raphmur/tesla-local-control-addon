@@ -1,25 +1,28 @@
 configuration:
-  mqtt_ip:
+  vin_list:
+    name: Single or multiple VINs separated by a | (pipe); VIN found in Tesla app
+    description: Single 5YJ3E1EB6JF111222; Multiple 5YJ3E1EB6JF111222|5YJ3E1EB6JF333444|...
+  presence_detection_ttl:
+    name: BLE proximity presence detection TTL
+    description: TTL in seconds when the car is considered gone; Use 0 to disable detection
+  ble_mac_list:
+    name: Single or multiple BLE MACs (aa:bb:cc:dd:ee:ff) separated by a | (pipe); Optional for proximity detection
+    description: Use Android "BLE scanner" or iOS "nRF Connect"; First locate your car's BLE Local Name, it starts with letter S and ends with C. In the app for the car, find the MAC address. If you have multiple Twsla cars, use the signal strength to figure out which one to pick.
+  mqtt_server:
     name: MQTT Server
     description: MQTT Server's IP address or valid Hostname
   mqtt_port:
     name: MQTT Port
     description: MQTT Listen Port
-  mqtt_user:
-    name: MQTT User
-    description: MQTT Username
-  mqtt_pwd:
+  mqtt_username:
+    name: MQTT Username; Default empty is "anonymous" mode
+    description: MQTT Username;
+  mqtt_password:
     name: MQTT Password
     description: MQTT User's password
-  vin:
-    name: Car's VIN
-    description: Vehicle Identification Number found in Tesla app
-  ble_mac:
-    name: BLE MAC (optional for proximity detection)
-    description: Car's BLE MAC (aa:bb:cc:dd:ee:ff). Use Android "BLE scanner" or iOS "nRF Connect" to find the MAC of the Tesla BLE Device which looks like S___________C
   debug:
     name: Debug Logging
     description: Print verbose messages to the log for debugging
-  send_cmd_retry_delay:
+  ble_cmd_retry_delay:
     name: Delay to retry a command
     description: Delay to retry sending a command to the vehicle over BLE

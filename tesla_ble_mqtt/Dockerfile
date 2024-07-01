@@ -16,10 +16,11 @@ COPY --from=builder /root/go/bin/tesla-control /usr/bin/
 
 # install dependencies
 RUN apk add --no-cache \
-  openssl \
   bluez \
+  bluez-deprecated \
+  openssl \
   mosquitto-clients
-  
+
 # Copy data for add-on
 COPY app /app/
 RUN chmod a+x /app/run.sh
